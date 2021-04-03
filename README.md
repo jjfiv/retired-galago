@@ -1,4 +1,4 @@
-# Retired Galago
+# Retired Galago [![maven](https://github.com/jjfiv/retired-galago/actions/workflows/maven.yml/badge.svg)](https://github.com/jjfiv/retired-galago/actions/workflows/maven.yml)
 
 This version of Galago is kept around for determining backwards-compatibility with Galago indexes and scoring. It supports no new features or development. 
 
