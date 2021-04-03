@@ -1,17 +1,12 @@
 // BSD License (http://lemurproject.org/galago-license)
 package org.lemurproject.galago.core.tools;
 
-import org.lemurproject.galago.tupleflow.GalagoConf;
 import org.lemurproject.galago.utility.Parameters;
 import org.lemurproject.galago.utility.tools.AppFunction;
-import org.reflections.Reflections;
+import org.lemurproject.galago.core.tools.apps.*;
 
 import java.io.PrintStream;
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,50 +24,54 @@ public class App {
     // init function -- allows internal use of app function library
     static {
         log = Logger.getLogger("Galago-App");
+
+        AppFunction[] available = new AppFunction[] { new org.lemurproject.galago.core.repair.RepairFn(),
+                new TimedBatchSearch(),
+                new DumpTermStatisticsFn(),
+                new DumpCorpusFn(),
+                new DebugQuery(),
+                new BatchSearch(),
+                new BuildWindowIndex(),
+                new DumpIndexManifestFn(),
+                new TransformQueryFn(),
+                new StatsFn(),
+                new DumpNamesLengths(),
+                new BuildStemmerConflation(),
+                new org.lemurproject.galago.core.tools.MakeCorpus(),
+                new DumpLengthsFn(),
+                new DumpKeysFn(),
+                new GetDocsJSONL(),
+                new DumpConnectionFn(),
+                new ThreadedBatchSearch(),
+                new GetRMTermsFn(),
+                new BuildSpecialPart(),
+                new QueryTransformFn(),
+                new DumpDocNameFn(),
+                new DumpTermStatisticsExtFn(),
+                new org.lemurproject.galago.utility.tools.TarToZipConverter(),
+                new org.lemurproject.galago.core.tools.apps.DumpIndexFn(),
+                new org.lemurproject.galago.tupleflow.tools.ShowConfig(),
+                new HelpFn(),
+                new DumpKeyValueFn(),
+                new org.lemurproject.galago.core.eval.Eval(), new org.lemurproject.galago.core.tools.apps.BuildIndex(),
+                new HarvestLinksFn(),
+                new ChainFns(),
+                new DocCountFn(),
+                new DumpDocFn(),
+                new OverwriteManifestFn(),
+                new DumpDocTermsFn(),
+                new org.lemurproject.galago.core.index.merge.MergeIndex(),
+                new XCountFn(),
+                new PageRankFn(),
+                new TokenizeAndGrabStats(),
+                new OperatorHelpFn(),
+                new DumpDocIdFn(),
+                new BuildPartialIndex() };
+
         appFunctions = new HashMap<>();
 
-        // list of classpaths to scan
-        List<String> cps = new ArrayList<String>();
-        cps.add("org.lemurproject.galago");
-        cps.add("org.lemurproject.galago.core.eval");
-
-        Parameters p = GalagoConf.getAllOptions();
-        if (p.isString("appclasspath") || p.isList("appclasspath", String.class)) {
-            cps.addAll(p.getAsList("appclasspath", String.class));
-        }
-
-        for (String cp : cps) {
-            processClassPath(cp);
-        }
-    }
-
-    // MCZ 3/2015 - made this logic its own function so "wrapper" applications such
-    // as Proteus can add AppFunctions by just calling this rather than having to
-    // remember to add an "appclasspath" parameter to the galago config file.
-    public static void processClassPath(String cp) {
-        Reflections reflections = new Reflections(cp);
-        Set<Class<? extends AppFunction>> apps = reflections.getSubTypesOf(AppFunction.class);
-
-        for (Class<? extends AppFunction> c : apps) {
-            try {
-                Constructor<? extends AppFunction> cons = c.getConstructor();
-                AppFunction fn = cons.newInstance();
-                String name = fn.getName();
-
-                // if we have a duplicated function - use the first one.
-                if (appFunctions.containsKey(name)) {
-                    AppFunction previousByName = appFunctions.get(name);
-                    if(previousByName.getClass().equals(c)) {
-                        // if it's the same class, don't log anything.
-                        continue;
-                    }
-                    log.info("Found duplicated function name: " + c.getName() + ". Arbitrarily using: " + appFunctions.get(name).getClass().getName());
-                } else {
-                    appFunctions.put(fn.getName(), fn);
-                }
-            } catch (Exception e) {
-                log.log(Level.INFO, "Failed to find constructor for app: {0}", c.getName());
-            }
+        for (AppFunction f : available) {
+            appFunctions.put(f.getName(), f);
         }
     }
 

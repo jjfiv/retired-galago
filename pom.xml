@@ -46,11 +46,6 @@
       <artifactId>snappy-java</artifactId>
       <version>1.0.5-M4</version>
     </dependency>
-    <dependency>
-      <groupId>org.reflections</groupId>
-      <artifactId>reflections</artifactId>
-      <version>0.9.10</version>
-    </dependency>
           <dependency>
               <groupId>net.sf.trove4j</groupId>
               <artifactId>trove4j</artifactId>
@@ -110,12 +105,17 @@
           <argLine>-Xms1500m -Xmx1900m -Dfile.encoding=UTF-8</argLine>
         </configuration>
       </plugin>
+      <!-- build a jar with relative classpath -->
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>2.3.1</version>
+        <version>3.2.0</version>
         <configuration>
           <archive>
+            <index>true</index>
             <manifest>
+              <classpathPrefix>lib/</classpathPrefix>
+              <addClasspath>true</addClasspath>
+              <useUniqueVersions>false</useUniqueVersions>
               <mainClass>org.lemurproject.galago.core.tools.App</mainClass>
             </manifest>
           </archive>
@@ -130,6 +130,22 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+<!-- copy dependencies to relative classpath -->
+<plugin>
+  <artifactId>maven-dependency-plugin</artifactId>
+  <executions>
+    <execution>
+      <phase>package</phase>
+      <goals>
+        <goal>copy-dependencies</goal>
+      </goals>
+      <configuration>
+        <outputDirectory>${project.build.directory}/lib</outputDirectory>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+
     </plugins>
   </build>
 </project>

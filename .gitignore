@@ -10,4 +10,4 @@ nb-configuration.xml
 .settings
 .vscode
 .project
-
+.classpath
