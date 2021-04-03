@@ -2,7 +2,7 @@
 nbactions.xml
 nb-configuration.xml
 *.class
-*/target/*
+/target/
 *.iml
 .idea
 *.prj
@@ -10,3 +10,4 @@ nb-configuration.xml
 .settings
 .vscode
 .project
+
