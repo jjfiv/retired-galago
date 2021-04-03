@@ -7,7 +7,7 @@
   <packaging>jar</packaging>
   <name>rgalago</name>
   <properties>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <licenses>
     <license>
@@ -46,26 +46,31 @@
       <artifactId>snappy-java</artifactId>
       <version>1.1.8.4</version>
     </dependency>
-          <dependency>
-              <groupId>net.sf.trove4j</groupId>
-              <artifactId>trove4j</artifactId>
-              <version>3.0.3</version>
-          </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-compress</artifactId>
-                <version>1.20</version>
-            </dependency>
+    <dependency>
+      <groupId>com.github.rholder</groupId>
+      <artifactId>snowball-stemmer</artifactId>
+      <version>1.3.0.581.1</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.trove4j</groupId>
+      <artifactId>trove4j</artifactId>
+      <version>3.0.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-compress</artifactId>
+      <version>1.20</version>
+    </dependency>
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
       <version>3.0.2</version>
     </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-math3</artifactId>
-                <version>3.6.1</version>
-            </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-math3</artifactId>
+      <version>3.6.1</version>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -125,21 +130,21 @@
           <target>1.8</target>
         </configuration>
       </plugin>
-<!-- copy dependencies to relative classpath -->
-<plugin>
-  <artifactId>maven-dependency-plugin</artifactId>
-  <executions>
-    <execution>
-      <phase>package</phase>
-      <goals>
-        <goal>copy-dependencies</goal>
-      </goals>
-      <configuration>
-        <outputDirectory>${project.build.directory}/lib</outputDirectory>
-      </configuration>
-    </execution>
-  </executions>
-</plugin>
+      <!-- copy dependencies to relative classpath -->
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/lib</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
 
     </plugins>
   </build>
