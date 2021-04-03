@@ -2,16 +2,14 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.github.jjfiv</groupId>
-    <artifactId>galago4</artifactId>
+    <artifactId>rgalago</artifactId>
     <version>4.0</version>
   </parent>
-  <groupId>com.github.jjfiv.galago4</groupId>
+  <groupId>com.github.jjfiv.rgalago</groupId>
   <artifactId>utility</artifactId>
   <packaging>jar</packaging>
   <version>4.0</version>
   <name>utility</name>
-  <url>http://lemurproject.org/galago.php</url>
-  <description>TupleFlow is the distributed computation layer of Galago.</description>
   <licenses>
     <license>
       <name>BSD license</name>
@@ -19,11 +17,6 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-  <scm>
-    <connection>scm:hg:http://lemur.hg.sourceforge.net:8000/hgroot/lemur/galago</connection>
-    <developerConnection>scm:hg:ssh://USERNAME@lemur.hg.sourceforge.net/hgroot/lemur/galago</developerConnection>
-    <url>http://lemur.hg.sourceforge.net/hgweb/lemur/galago/</url>
-  </scm>
   <dependencies>
     <dependency>
       <groupId>net.sf.trove4j</groupId>

@@ -1,11 +1,15 @@
-# Galago-Mini-Frozen
+# Retired Galago
 
-This version of Galago is kept around for backwards-compatibility with Galago indexes. It supports no new features or development. Extraneous dependencies will be pruned!
+This version of Galago is kept around for determining backwards-compatibility with Galago indexes and scoring. It supports no new features or development. 
 
-## Is this the Galago from the Text Book I have?
-
-No, that version is older and preserved here: [The Book Version](http://ciir.cs.umass.edu/downloads/SearchEnginesGalagoCode/)
+- Extraneous dependencies have been removed!
+- That means no HTML/Web server.
+- No Wiki Parsing.
+- No NLP.
+- No galago typebuilder.
+- No new tupleflow pipelines.
 
 ## License
-Galago is distributed under the BSD license.  See the LICENSE file for details.
+
+Retired-Galago is distributed under the BSD license, like the [original](https://lemurproject.org/galago). See the LICENSE file for details.
 
