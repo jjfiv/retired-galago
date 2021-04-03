@@ -3,9 +3,8 @@ package org.lemurproject.galago.utility;
 
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
-import org.tukaani.xz.LZMA2Options;
-import org.tukaani.xz.XZInputStream;
-import org.tukaani.xz.XZOutputStream;
+import org.apache.commons.compress.compressors.xz.XZCompressorInputStream;
+import org.apache.commons.compress.compressors.xz.XZCompressorOutputStream;
 
 import java.io.*;
 import java.util.zip.GZIPInputStream;
@@ -43,7 +42,7 @@ public class StreamCreator {
     } else if (filename.endsWith(".bz") || filename.endsWith(".bz2")) {
       return new DataInputStream(new BZip2CompressorInputStream(new FileInputStream(filename), true));
     } else if(filename.endsWith(".xz")) {
-      return new DataInputStream(new XZInputStream(new FileInputStream(filename)));
+      return new DataInputStream(new XZCompressorInputStream(new FileInputStream(filename)));
     } else {
       return new DataInputStream(new FileInputStream(filename));
     }
@@ -61,7 +60,7 @@ public class StreamCreator {
     } else if (filename.endsWith(".bz") || filename.endsWith(".bz2")) {
       return new DataOutputStream(new BZip2CompressorOutputStream(new FileOutputStream(filename)));
     } else if(filename.endsWith(".xz")) {
-      return new DataOutputStream(new XZOutputStream(new FileOutputStream(filename), new LZMA2Options()));
+      return new DataOutputStream(new XZCompressorOutputStream(new FileOutputStream(filename)));
     } else {
       return new DataOutputStream(new FileOutputStream(filename));
     }

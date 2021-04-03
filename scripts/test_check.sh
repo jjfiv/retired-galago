@@ -11,7 +11,7 @@ set -e -u
 # at the end.
 #
 
-TEST_FILES=`grep "@Test" contrib/src/* core/src/* tupleflow/src/* tupleflow-typebuilder/src/* -Rl`
+TEST_FILES=`grep "@Test" src/* -Rl`
 
 for FILE_NAME in $TEST_FILES; do
   [[ $FILE_NAME == *Test.java ]] || echo "Maven will skip $FILE_NAME silently! Please rename!"
