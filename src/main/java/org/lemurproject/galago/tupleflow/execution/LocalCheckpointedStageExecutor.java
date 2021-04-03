@@ -27,7 +27,7 @@ public class LocalCheckpointedStageExecutor extends CheckpointedStageExecutor {
 
     private String stageName;
     private List<String> instanceFiles;
-    ArrayList<Exception> exceptions = new ArrayList();
+    ArrayList<Exception> exceptions = new ArrayList<>();
     int queuedInstances = 0;
     int runningInstances = 0;
     int completedInstances = 0;
@@ -45,7 +45,7 @@ public class LocalCheckpointedStageExecutor extends CheckpointedStageExecutor {
 
     @Override
     public void run() {
-      Map<String, StageInstanceDescription> instances = new HashMap();
+      Map<String, StageInstanceDescription> instances = new HashMap<>();
 
       for (String instanceFile : instanceFiles) {
         try {
@@ -88,7 +88,7 @@ public class LocalCheckpointedStageExecutor extends CheckpointedStageExecutor {
 
           // run job
           try {
-            ExNihiloSource source = factory.instantiate(instances.get(instanceFile));
+            ExNihiloSource<?> source = factory.instantiate(instances.get(instanceFile));
             source.run();
           } catch (Throwable err) {
             err.printStackTrace();
@@ -170,7 +170,7 @@ public class LocalCheckpointedStageExecutor extends CheckpointedStageExecutor {
 
     @Override
     public synchronized List<Double> getRunTimes() {
-      ArrayList<Double> times = new ArrayList();
+      ArrayList<Double> times = new ArrayList<>();
       // do something
       return times;
     }

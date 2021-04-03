@@ -154,7 +154,7 @@ public class LocalRetrievalTest {
     }
 
     public static File[] make10DocIndex() throws Exception {
-        File trecCorpusFile, corpusFile, indexFile;
+        File trecCorpusFile, indexFile;
 
         // create a simple doc file, trec format:
         trecCorpusFile = FileUtility.createTemporary();
@@ -171,24 +171,18 @@ public class LocalRetrievalTest {
                 + AppTest.trecDocument("10", "program fits"),
                 trecCorpusFile);
 
-        // now, attempt to make a corpus file from that.
-        corpusFile = FileUtility.createTemporaryDirectory();
-        App.main(new String[]{"make-corpus", "--corpusPath=" + corpusFile.getAbsolutePath(),
-            "--inputPath=" + trecCorpusFile.getAbsolutePath(), "--distrib=2"});
-
-        // make sure the corpus file exists
-        assertTrue(corpusFile.exists());
-
         // now, try to build an index from that
         indexFile = FileUtility.createTemporaryDirectory();
         App.main(new String[]{"build", "--stemmedPostings=false", "--indexPath=" + indexFile.getAbsolutePath(),
-            "--inputPath=" + corpusFile.getAbsolutePath()});
+            "--inputPath=" + trecCorpusFile.getAbsolutePath()});
+
+        
 
         AppTest.verifyIndexStructures(indexFile);
 
         File[] files = new File[3];
         files[0] = trecCorpusFile;
-        files[1] = corpusFile;
+        files[1] = new File(indexFile, "corpus");
         files[2] = indexFile;
         return files;
     }
